@@ -7,6 +7,7 @@ export default createStore({// Creating a new store and exporting it so that it 
     state: {// This is where we define the data that our app will use
 
         employees: [], // We're defining an empty array called employees
+        selectedEmployee: [], // We're defining a variable called selectedEmployee and setting it to an empty array
     },
 
     getters: {// This is where we define functions that will return data from our app
@@ -23,6 +24,11 @@ export default createStore({// Creating a new store and exporting it so that it 
         SET_EMPLOYEES(state, employees) { //SET_EMPLOYEES is a mutation function that takes the state and employees as arguments and sets the employees array in the state to the employees argument
             state.employees = employees; //We're setting the employees array in the state to the employees argument
         },
+
+        // We're defining a function called SET_SELECTED_EMPLOYEE that will set the selectedEmployee data in the state
+        SET_SELECTED_EMPLOYEE(state, employee) { //SET_SELECTED_EMPLOYEE is a mutation function that takes the state and employee as arguments and sets the selectedEmployee variable in the state to the employee argument
+            state.selectedEmployee = employee; //We're setting the selectedEmployee variable in the state to the employee argument
+        },
     },
 
     actions: {// This is where we define functions that will make HTTP requests to fetch data from an API
@@ -31,6 +37,12 @@ export default createStore({// Creating a new store and exporting it so that it 
         async fetchEmployees({ commit }) {
             const response = await axios.get("http://localhost/PhpTutorials/EmployeesRecord/api/employees.php"); //We're making an HTTP GET request to the given URL and storing the response in a variable called response
             commit("SET_EMPLOYEES", response.data); //After fetching the data, we call the SET_EMPLOYEES mutation function to set the employees data in the state
+        },
+
+        // We're defining a function called fetchEmployeeById that will make an HTTP request to fetch a single employee data
+        async fetchEmployeeById({ commit }, id) {
+            const response = await axios.get(`http://localhost/PhpTutorials/EmployeesRecord/api/employees.php?id=${id}`); //We're making an HTTP GET request to the given URL and storing the response in a variable called response
+            commit("SET_SELECTED_EMPLOYEE", response.data); //After fetching the data, we call the SET_SELECTED_EMPLOYEE mutation function to set the selectedEmployee data in the state
         },
     },
 });

@@ -1,4 +1,5 @@
 <script setup>
+import Header from '@/components/Header.vue'// Import the Header component
 import { onMounted, computed } from 'vue'; // Import onMounted and computed from Vue
 import { useStore } from 'vuex'; // Import useStore from Vuex
 
@@ -23,10 +24,7 @@ const totalEmployees = computed(() => store.getters.totalEmployees);
 <template>
     <div class="container mt-5 mb-5">
 
-        <div class="alert alert-success">
-            <h1><strong>Employees View</strong></h1>
-            <p>See list of employees data</p>
-        </div>
+        <Header title="Employees View" description="See list of employees data" />
 
         <div>
             <table class="table table-sm">
@@ -39,6 +37,7 @@ const totalEmployees = computed(() => store.getters.totalEmployees);
                         <th>Occupation</th>
                         <th>Income</th>
                         <th>Married</th>
+                        <th>View</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +60,7 @@ const totalEmployees = computed(() => store.getters.totalEmployees);
                         <td>{{ employee.occupation }}</td>
                         <td>{{ employee.income }}</td>
                         <td>{{ employee.married ? 'Yes' : 'No' }}</td>
+                        <td><router-link :to="{ name: 'EmployeeDetailsView', params: { id: employee.id }}">View</router-link></td>
                     </tr>
                 </tbody>
             </table>
