@@ -60,7 +60,7 @@ const totalEmployees = computed(() => store.getters.totalEmployees);
                         <td>{{ employee.occupation }}</td>
                         <td>{{ employee.income }}</td>
                         <td>{{ employee.married ? 'Yes' : 'No' }}</td>
-                        <td><router-link :to="{ name: 'EmployeeDetailsView', params: { id: employee.id }}">View</router-link></td>
+                        <td><RouterLink :to="{ name: 'EmployeeDetailsView', params: { id: employee.id }}">View</RouterLink></td>
                     </tr>
                 </tbody>
             </table>
